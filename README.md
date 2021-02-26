@@ -19,10 +19,14 @@ Partes del tutorial
 - CORS
 - Seguridad + JWT
 - Rate limit
-- Tracing
+- Tracing/Monitoring
 - HETOAS
 - Concurrency
 - OData
 - GraphQL
 - Docker
+- Service Mesh
+- API Discovery
+- Azure App Services - API apps
+- CI/CD
 - Nuestro API como Serverless
