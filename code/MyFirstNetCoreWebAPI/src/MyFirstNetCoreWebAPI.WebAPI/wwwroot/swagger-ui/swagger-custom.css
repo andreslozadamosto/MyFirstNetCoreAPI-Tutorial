@@ -1,0 +1,22 @@
+﻿.swagger-ui .topbar {
+    background-color: #1abc9c;
+}
+
+.topbar-wrapper a img[alt="Swagger UI"] {
+    display: none;
+}
+
+.topbar-wrapper a {
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: url(apilogo.png) no-repeat;
+    width: 300px; /* Width of new image */
+    height: 86px; /* Height of new image */
+    padding-left: 180px; /* Equal to width of new image */
+}
+
+
+.topbar-wrapper .select-label span {
+    color: #212121;
+}

@@ -1,9 +1,11 @@
 ﻿using MyFirstNetCoreWebAPI.WebAPI.Data.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyFirstNetCoreWebAPI.WebAPI.Models
 {
     public class UserDto
     {
+        [Required]
         public string Name { get; init; }
 
         public UserDto(string name)

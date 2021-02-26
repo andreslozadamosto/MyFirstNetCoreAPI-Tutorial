@@ -11,8 +11,17 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyFirstNetCoreWebAPI.WebAPI.Data\MyFirstNetCoreWebAPI.WebAPI.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\swagger-ui\swagger-custom.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
