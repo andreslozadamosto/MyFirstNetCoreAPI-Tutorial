@@ -24,11 +24,10 @@ namespace MyFirstNetCoreWebAPI.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { 
+                c.SwaggerDoc("MyFirstNetCoreRESTAPI-V1", new OpenApiInfo { 
                     Title = "My First Net Core REST API",
                     Version = "v1",
                     Description = "A simple example ASP.NET Core Web API by Andrés Lozada Mosto, You can find this tutorial here: https://dev.to/andreslozadamosto/creando-un-api-en-net-core-5-intro-2nc2",
@@ -65,7 +64,7 @@ namespace MyFirstNetCoreWebAPI.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyFirstNetCoreWebAPI.WebAPI v1");
+                    c.SwaggerEndpoint("/swagger/MyFirstNetCoreRESTAPI-V1/swagger.json", "MyFirstNetCoreRESTAPI v1");
                     c.InjectStylesheet("/swagger-ui/swagger-custom.css");
                 });
             }
