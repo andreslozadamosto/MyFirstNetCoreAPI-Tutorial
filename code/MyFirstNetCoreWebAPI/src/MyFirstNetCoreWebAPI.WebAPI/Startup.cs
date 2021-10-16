@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MyFirstNetCoreWebAPI.WebAPI.Configuration;
 using MyFirstNetCoreWebAPI.WebAPI.Data.Interfaces;
 using MyFirstNetCoreWebAPI.WebAPI.Data.Repositories;
-using System;
-using System.IO;
-using System.Reflection;
 
 namespace MyFirstNetCoreWebAPI.WebAPI
 {
@@ -25,33 +25,14 @@ namespace MyFirstNetCoreWebAPI.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("MyFirstNetCoreRESTAPI-V1", new OpenApiInfo { 
-                    Title = "My First Net Core REST API",
-                    Version = "v1",
-                    Description = "A simple example ASP.NET Core Web API by Andrés Lozada Mosto, You can find this tutorial here: https://dev.to/andreslozadamosto/creando-un-api-en-net-core-5-intro-2nc2",
-                    TermsOfService = new Uri("https://example.com/terms"),
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Andres Lozada Mosto",
-                        Email = string.Empty,
-                        Url = new Uri("https://github.com/andreslozadamosto"),
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Use under MIT licence",
-                        Url = new Uri("https://choosealicense.com/licenses/mit/"),
-                    }
-                });
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+            services
+                .AddStartupSwagger()
+                .AddStartupRateLimit(Configuration);
 
-
-            services.AddSingleton<IUserRepository, UserRepository>();
+            services
+                .AddSingleton<IUserRepository, UserRepository>()
+                .TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,24 +42,18 @@ namespace MyFirstNetCoreWebAPI.WebAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseStaticFiles();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/MyFirstNetCoreRESTAPI-V1/swagger.json", "MyFirstNetCoreRESTAPI v1");
-                    c.InjectStylesheet("/swagger-ui/swagger-custom.css");
-                });
+                app.UseStartupSwagger();
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                .UseHttpsRedirection()
+                .UseRouting()
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                })
+                .UseStartupRateLimit();
         }
     }
 }
