@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Andres\workspaces\MyFirstNetCoreAPI-Tutorial\code\MyFirstNetCoreWebAPI\FastEndpoints\src\MyFirstNetCoreAPI.WebAPI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Andres\workspaces\MyFirstNetCoreAPI-Tutorial\code\MyFirstNetCoreWebAPI\FastEndpoints\src\MyFirstNetCoreAPI.WebAPI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="5.7.2" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="5.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Commons\src\Commons.DTOs\Commons.DTOs.csproj" />
+  </ItemGroup>
+
+</Project>
